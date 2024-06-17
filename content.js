@@ -5,14 +5,6 @@ scriptEl.setAttribute('src', chrome.runtime.getURL('inject.js'));
 bodyEl.appendChild(scriptEl);
 
 /*
-const headEl = document.getElementsByTagName('head')[0];
-const styleEl = document.createElement('link');
-styleEl.setAttribute('rel', 'stylesheet');
-styleEl.setAttribute('href', 'hoverstyle.css');
-headEl.appendChild(styleEl);
-*/
-
-/*
 const mapEl = document.getElementsByClassName('svgMap-map-controls-wrapper');
 const keyWrapper = document.createElement("div");
 keyWrapper.classList.add("map-colour-key-wrapper");
