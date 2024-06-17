@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "Letterboxd improved country colours",
+    "version": "1.0",
+    "description": "Improved colours for displaying films per country on Letterboxd stats pages",
+    "content_scripts": [
+        {
+          "js": [
+            "content.js"
+          ],
+          "matches": [
+            "https://letterboxd.com/*/stats/",
+            "https://letterboxd.com/*/year/*/"
+          ]
+        }
+      ],
+      "web_accessible_resources" : [
+        {
+            "resources" : [
+              "inject.js"
+            ],
+            "extension_ids": ["*"],
+            "matches": [ "*://*/*" ]
+        }
+    ]
+  }
