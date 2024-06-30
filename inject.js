@@ -49,19 +49,28 @@ const medianCount = uniqueCounts[Math.floor((uniqueCounts.length - 1) / 2)];
 const mapEl = document.getElementsByClassName('svgMap-map-controls-wrapper');
 const keyWrapper = document.createElement("div");
 keyWrapper.classList.add("map-colour-key-wrapper");
-//keyWrapper.style.cursor = 'default';
+keyWrapper.style.cursor = 'default';
 keyWrapper.style.height = '30px';
 keyWrapper.style.position = 'relative';
 keyWrapper.style.background = "#2c3440";
 keyWrapper.style.display = 'flex';
+
 const colourKeyA = document.createElement("div");
 const colourKeyB = document.createElement("div");
 const colourKeyC = document.createElement("div");
 const colourKeyD = document.createElement("div");
 const colourKeyE = document.createElement("div");
 const colourKeys = [colourKeyA, colourKeyB, colourKeyC, colourKeyD, colourKeyE];
-const keyNumbers = [1, Math.round((1 + medianCount) / 2), medianCount, Math.round(Math.exp((Math.log(medianCount) + Math.log(maxWatchCount)) / 2)), maxWatchCount]
+const keyNumbers = [1, Math.round((1 + medianCount) / 2), medianCount, Math.round(Math.exp((Math.log(medianCount) + Math.log(maxWatchCount)) / 2)), maxWatchCount];
+const keyHues = [143, 143, 0, 30, 30];
+const keySats = ['100%', '100%', '0%', '100%', '100%'];
+const keyLights = ['23%', '61%', '100%', '75%', '51%'];
+const keyHoverLights = ['12%', '31%', '50%', '38%', '26%'];
+
 colourKeys.forEach((colkey, index) => {
+    let colKeyBG = 'hsl(' + keyHues[index] + ", " + keySats[index] + ", " + keyLights[index] + ")";
+    let colKeyHoverBG = 'hsl(' + keyHues[index] + ", " + keySats[index] + ", " + keyHoverLights[index] + ")";
+    colkey.style.background = colKeyBG;
     colkey.style.height = '20px';
     colkey.style.width = '20px';
     colkey.style.position = 'relative';
@@ -69,23 +78,27 @@ colourKeys.forEach((colkey, index) => {
     colkey.style.display = 'flex';
     colkey.style.justifyContent = 'center';
     colkey.style.alignItems = 'center';
+    colkey.style.color = 'white';
     //colkey.style.fontWeight = 'bold';
     //colkey.style.fontFamily = 'TiemposTextWeb-Semibold, Georgia, serif';
     let innerNum = keyNumbers[index];
-    colkey.innerText = innerNum;
+    if (innerNum < 100) {
+        colkey.style.fontSize = 'smaller';
+    }
+    else {
+        colkey.style.fontSize = 'xx-small';
+    }
+    colkey.addEventListener('mouseenter', () => {
+        colkey.style.background = colKeyHoverBG;
+        colkey.innerText = innerNum;
+    })
+    colkey.addEventListener('mouseleave', () => {
+        colkey.style.background = colKeyBG;
+        colkey.innerText = "";
+    })
     colkey.classList.add('col-key');
     keyWrapper.appendChild(colkey);
-})
-colourKeyA.style.background = 'hsl(143, 100%, 23%)';
-colourKeyB.style.background = 'hsl(143, 100%, 61%)';
-colourKeyC.style.background = 'hsl(143, 100%, 100%)';
-colourKeyD.style.background = 'hsl(30, 100%, 75%)';
-colourKeyE.style.background = 'hsl(30, 100%, 51%)';
-colourKeyA.style.color = 'hsl(143, 100%, 61%)';
-colourKeyB.style.color = 'hsl(143, 100%, 23%)';
-colourKeyC.style.color = '#2c3440';
-colourKeyD.style.color = 'hsl(30, 100%, 45%)';
-colourKeyE.style.color = 'hsl(30, 100%, 90%)';
+});
 
 [...mapEl].forEach(value => {
     value.appendChild(keyWrapper);
