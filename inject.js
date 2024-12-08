@@ -22,14 +22,14 @@ const medianCount = uniqueCounts[Math.floor((uniqueCounts.length - 1) / 2)];
     let fillhue;
     let fillsat = "100%";
     let filllight;
-    if (watchCount <= medianCount) {
+    if (watchCount < medianCount) {
         let prop = (watchCount - 1) / (medianCount - 1);
         fillhue = "143";
         let light = Math.round(23 + (77 * prop));
         filllight = light.toString() + "%";
     }
     else {
-        let prop = (Math.log(watchCount) - Math.log(medianCount) + 1)/(Math.log(maxWatchCount) - Math.log(medianCount) + 1);
+        let prop = (watchCount == maxWatchCount) ? 1 : (Math.log(watchCount) - Math.log(medianCount))/(Math.log(maxWatchCount) - Math.log(medianCount));
         fillhue = "30";
         let light = Math.round(100 - (49 * prop));
         filllight = light.toString() + "%";
