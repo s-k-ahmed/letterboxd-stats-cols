@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Letterboxd improved country colours",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "Improved colours for displaying films per country on Letterboxd stats pages",
     "content_scripts": [
         {
@@ -10,7 +10,8 @@
           ],
           "matches": [
             "https://letterboxd.com/*/stats/",
-            "https://letterboxd.com/*/year/*/"
+            "https://letterboxd.com/*/year/*/",
+            "https://letterboxd.com/countries/"
           ]
         }
       ],
